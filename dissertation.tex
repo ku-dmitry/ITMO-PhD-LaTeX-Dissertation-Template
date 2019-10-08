@@ -1,7 +1,7 @@
 %&preformat-disser
 \RequirePackage[l2tabu,orthodox]{nag} % Раскомментировав, можно в логе получать рекомендации относительно правильного использования пакетов и предупреждения об устаревших и нерекомендуемых пакетах
 % Формат А4, 14pt (ГОСТ Р 7.0.11-2011, 5.3.6)
-\documentclass[a4paper,14pt,oneside,openany]{memoir}
+\documentclass[a4paper,11pt,oneside,openany]{memoir}
 
 \input{common/setup}            % общие настройки шаблона
 \input{common/packages}         % Пакеты общие для диссертации и автореферата
@@ -20,19 +20,19 @@
 \input{Dissertation/userstyles} % Стили для специфических пользовательских задач
 
 %%% Библиография. Выбор движка для реализации %%%
-\ifnumequal{\value{bibliosel}}{0}{%
+\ifnumequal{\value{bibliosel}}{1}{%
     \input{biblio/predefined}   % Встроенная реализация с загрузкой файла через движок bibtex8
 }{
     \input{biblio/biblatex}     % Реализация пакетом biblatex через движок biber
 }
 
 % Вывести информацию о выбранных опциях в лог сборки
-\typeout{Selected options:}
-\typeout{Draft mode: \arabic{draft}}
-\typeout{Font: \arabic{fontfamily}}
-\typeout{AltFont: \arabic{usealtfont}}
-\typeout{Bibliography backend: \arabic{bibliosel}}
-\typeout{Precompile images: \arabic{imgprecompile}}
+%\typeout{Selected options:}
+%\typeout{Draft mode: \arabic{draft}}
+%\typeout{Font: \arabic{fontfamily}}
+%\typeout{AltFont: \arabic{usealtfont}}
+%\typeout{Bibliography backend: \arabic{bibliosel}}
+%\typeout{Precompile images: \arabic{imgprecompile}}
 % Вывести информацию о версиях используемых библиотек в лог сборки
 \listfiles
 
@@ -52,25 +52,31 @@
 \input{common/renames}                 % Переопределение именований
 
 %%% Структура диссертации (ГОСТ Р 7.0.11-2011, 4)
-\include{Dissertation/title}           % Титульный лист
+\setcounter{page}{5}
 \include{Dissertation/contents}        % Оглавление
+\include{Dissertation/ref}
+\include{Dissertation/syn}
+
+\include{Dissertation/acronyms}        % Список сокращений
+\include{Dissertation/termins}         % Список терминов
+\include{Dissertation/shortcuts}       % Список условных обозначений
 \include{Dissertation/introduction}    % Введение
 \include{Dissertation/part1}           % Глава 1
 \include{Dissertation/part2}           % Глава 2
 \include{Dissertation/part3}           % Глава 3
-\include{Dissertation/conclusion}      % Заключение
-\include{Dissertation/acronyms}        % Список сокращений и условных обозначений
-\include{Dissertation/dictionary}      % Словарь терминов
-\include{Dissertation/references}      % Список литературы
-\include{Dissertation/lists}           % Списки таблиц и изображений (иллюстративный материал)
+\include{Dissertation/lists}           % Список таблиц и изображений
+\include{Dissertation/references}
+\include{Dissertation/acknowledgements}
 
+\include{Dissertation/app1}
+\include{Dissertation/app2}
+\include{Dissertation/publications}    % Список публикаций
 %%% Настройки для приложений
 \appendix
 % Оформление заголовков приложений ближе к ГОСТ:
 \setlength{\midchapskip}{20pt}
 \renewcommand*{\afterchapternum}{\par\nobreak\vskip \midchapskip}
-\renewcommand\thechapter{\Asbuk{chapter}} % Чтобы приложения русскими буквами нумеровались
 
-\include{Dissertation/appendix}        % Приложения
-
+%\include{Dissertation/appendix}        % Приложения
+\include{Dissertation/resume}
 \end{document}
